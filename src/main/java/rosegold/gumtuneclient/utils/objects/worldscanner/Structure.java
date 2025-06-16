@@ -35,13 +35,9 @@ public enum Structure {
         add(new Triple<>(Blocks.dark_oak_stairs, null, null));
     }}, StructureType.CH_CRYSTALS, LocationUtils.Island.CRYSTAL_HOLLOWS, CrystalHollowsQuarter.PRECURSOR_REMNANTS, "§bCity", 24, 0, -17),
     TEMPLE(new ArrayList<Triple<Block, PropertyEnum, Comparable>>() {{
-        add(new Triple<>(Blocks.bedrock, null, null));
-        add(new Triple<>(Blocks.clay, null, null));
-        add(new Triple<>(Blocks.clay, null, null));
-        add(new Triple<>(Blocks.stained_hardened_clay, null, null));
-        add(new Triple<>(Blocks.wool, null, null));
         add(new Triple<>(Blocks.leaves, null, null));
         add(new Triple<>(Blocks.leaves, null, null));
+        add(new Triple<>(Blocks.hopper, null, null));
     }}, StructureType.CH_CRYSTALS, LocationUtils.Island.CRYSTAL_HOLLOWS, CrystalHollowsQuarter.JUNGLE, "§5Temple", -45, 47, -18),
     KING(new ArrayList<Triple<Block, PropertyEnum, Comparable>>() {{
         add(new Triple<>(Blocks.wool, null, null));
