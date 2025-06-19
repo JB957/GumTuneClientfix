@@ -6,6 +6,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import rosegold.gumtuneclient.utils.LocationUtils;
+import scala.sys.Prop;
 
 import java.util.ArrayList;
 
@@ -64,6 +65,39 @@ public enum Structure {
     FAIRY_GROTTO(new ArrayList<Triple<Block, PropertyEnum, Comparable>>() {{
         add(new Triple<>(Blocks.stained_glass, BlockColored.COLOR, EnumDyeColor.MAGENTA));
     }}, StructureType.FAIRY_GROTTO, LocationUtils.Island.CRYSTAL_HOLLOWS, CrystalHollowsQuarter.ANY, "", 0, 0, 0),
+
+    SHRINE(new ArrayList<Triple<Block, PropertyEnum, Comparable>>() {{
+        add(new Triple<>(Blocks.clay,null,null));
+        add(new Triple<>(Blocks.stonebrick, null, null));
+        add(new Triple<>(Blocks.sea_lantern, null, null));
+        add(new Triple<>(Blocks.stained_glass, BlockColored.COLOR, EnumDyeColor.MAGENTA));
+        add(new Triple<>(Blocks.stained_glass, BlockColored.COLOR, EnumDyeColor.MAGENTA));
+    }}, StructureType.FAIRY_GROTTO, LocationUtils.Island.CRYSTAL_HOLLOWS, CrystalHollowsQuarter.ANY, "§Shrine", 0, 0, 0),
+
+    OVERGROWN(new ArrayList<Triple<Block, PropertyEnum, Comparable>>() {{
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.SILVER));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.SILVER));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.SILVER));
+        add(new Triple<>(Blocks.stone, BlockStone.VARIANT, BlockStone.EnumType.DIORITE));
+        add(new Triple<>(Blocks.air, null,null));
+        add(new Triple<>(Blocks.leaves, null,null));
+        add(new Triple<>(Blocks.leaves, null,null));
+    }}, StructureType.FAIRY_GROTTO, LocationUtils.Island.CRYSTAL_HOLLOWS, CrystalHollowsQuarter.ANY, "§OverGrown", 0, 0, 0),
+
+    MANSION(new ArrayList<Triple<Block, PropertyEnum, Comparable>>() {{
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+        add(new Triple<>(Blocks.wool, BlockColored.COLOR, EnumDyeColor.GREEN));
+    }}, StructureType.FAIRY_GROTTO, LocationUtils.Island.CRYSTAL_HOLLOWS, CrystalHollowsQuarter.ANY, "§Mansion", 0, 0, 0),
 
     GOBLIN_HALL(new ArrayList<Triple<Block, PropertyEnum, Comparable>>() {{
         add(new Triple<>(Blocks.planks, BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE)); // 0
