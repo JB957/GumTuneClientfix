@@ -70,8 +70,8 @@ public class WorldScanner {
             return mobSpotWaypoints;
         }
 
-        public void updateFairyGrottos(BlockPos blockPos) {
-            this.fairyGrottosWaypoints.put(blockPos, 0);
+        public void updateFairyGrottos(String name, BlockPos blockPos) {
+            this.fairyGrottosWaypoints.put(name, blockPos);
         }
 
         public ConcurrentHashMap<BlockPos, Integer> getFairyGrottos() {
@@ -201,12 +201,21 @@ public class WorldScanner {
                     RenderUtils.renderBeacon(blockPos, Color.RED, event.partialTicks);
             }
         }
+//        if (WorldScannerFilter.worldScannerCHFairyGrottos) {
+//            for (BlockPos blockPos : currentWorld.getFairyGrottos().keySet()) {
+//                RenderUtils.renderEspBox(blockPos, event.partialTicks, Color.PINK.getRGB());
+//                RenderUtils.renderWaypointText("§dFairy Grotto", blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5, event.partialTicks);
+//                if (WorldScannerFilter.worldScannerCHFairyGrottosBeacon)
+//                    RenderUtils.renderBeacon(blockPos, Color.PINK, event.partialTicks);
+//            }
+//        }
         if (WorldScannerFilter.worldScannerCHFairyGrottos) {
-            for (BlockPos blockPos : currentWorld.getFairyGrottos().keySet()) {
-                RenderUtils.renderEspBox(blockPos, event.partialTicks, Color.PINK.getRGB());
-                RenderUtils.renderWaypointText("§dFairy Grotto", blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5, event.partialTicks);
+            for (Map.Entry<String, BlockPos> entry : currentWorld.getMobSpotWaypoints().entrySet()) {
+                BlockPos blockPos = entry.getValue();
+                RenderUtils.renderEspBox(blockPos, event.partialTicks, Color.RED.getRGB());
+                RenderUtils.renderWaypointText(entry.getKey(), blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5, event.partialTicks);
                 if (WorldScannerFilter.worldScannerCHFairyGrottosBeacon)
-                    RenderUtils.renderBeacon(blockPos, Color.PINK, event.partialTicks);
+                    RenderUtils.renderBeacon(blockPos, Color.RED, event.partialTicks);
             }
         }
         if (WorldScannerFilter.worldScannerCHWormFishing) {
@@ -277,12 +286,12 @@ public class WorldScanner {
                             if (structure.getStructureType().equals(StructureType.FAIRY_GROTTO)) {
                                 if (WorldScannerFilter.worldScannerCHFairyGrottos) {
                                     if (scanStructure(chunk, structure, x, y, z)) {
-                                        currentWorld.updateFairyGrottos(new BlockPos(chunk.xPosition * 16 + x, y, chunk.zPosition * 16 + z));
+                                        currentWorld.updateFairyGrottos(structure.getName(), new BlockPos(chunk.xPosition * 16 + x, y, chunk.zPosition * 16 + z));
                                         return;
                                     }
                                 } else if (WorldScannerFilter.worldScannerCHMagmaFieldsFairyGrottos && y < 64) {
                                     if (scanStructure(chunk, structure, x, y, z)) {
-                                        currentWorld.updateFairyGrottos(new BlockPos(chunk.xPosition * 16 + x, y, chunk.zPosition * 16 + z));
+                                        currentWorld.updateFairyGrottos(structure.getName(), new BlockPos(chunk.xPosition * 16 + x, y, chunk.zPosition * 16 + z));
                                         return;
                                     }
                                 }
