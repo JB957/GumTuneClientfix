@@ -18,6 +18,7 @@ import rosegold.gumtuneclient.GumTuneClient;
 import rosegold.gumtuneclient.modules.player.PathFinding;
 import rosegold.gumtuneclient.modules.render.CustomBlockESP;
 import rosegold.gumtuneclient.utils.*;
+import rosegold.gumtuneclient.utils.objects.Waypoint;
 import rosegold.gumtuneclient.utils.pathfinding.PathFinder;
 
 import java.awt.*;
@@ -101,8 +102,12 @@ public class MainCommand {
     }
 
     @SubCommand(description = "Sets Skip Cordinates")
-    private void skip(String x, String y, String z){
-
+    private void skip(){
+        double x = GumTuneClient.mc.thePlayer.posX + 29;
+        double y = GumTuneClient.mc.thePlayer.posY - 32;
+        double z = GumTuneClient.mc.thePlayer.posZ + 48;
+        BlockPos pos = new BlockPos(x,y,z);
+        new Waypoint("Skip", pos );
     }
 
     @SubCommand(description = "Break specified block", aliases = {"break"})
