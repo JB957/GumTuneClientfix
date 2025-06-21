@@ -8,7 +8,6 @@ import net.minecraft.crash.CrashReport;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.*;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -38,7 +37,7 @@ public class WorldScanner {
     public static class World {
         private final ConcurrentHashMap<String, BlockPos> crystalWaypoints;
         private final ConcurrentHashMap<String, BlockPos> mobSpotWaypoints;
-        private final ConcurrentHashMap<BlockPos, Integer> fairyGrottosWaypoints;
+        private final ConcurrentHashMap<String, BlockPos> fairyGrottosWaypoints;
         private final ConcurrentHashMap<BlockPos, Integer> wormFishingWaypoints;
         private final ConcurrentHashMap<BlockPos, Integer> dragonNestWaypoints;
         private final HashSet<Integer> chunkCache;
@@ -47,7 +46,7 @@ public class WorldScanner {
         public World(String serverName) {
             this.crystalWaypoints = new ConcurrentHashMap<>();
             this.mobSpotWaypoints = new ConcurrentHashMap<>();
-            this.fairyGrottosWaypoints = new ConcurrentHashMap<>();
+            this.fairyGrottosWaypoints = new ConcurrentHashMap<String, BlockPos>();
             this.wormFishingWaypoints = new ConcurrentHashMap<>();
             this.dragonNestWaypoints = new ConcurrentHashMap<>();
             this.chunkCache = new HashSet<>();
@@ -74,8 +73,8 @@ public class WorldScanner {
             this.fairyGrottosWaypoints.put(name, blockPos);
         }
 
-        public ConcurrentHashMap<BlockPos, Integer> getFairyGrottos() {
-            return this.fairyGrottosWaypoints;
+        public ConcurrentHashMap<String, BlockPos> getFairyGrottos() {
+            return fairyGrottosWaypoints;
         }
 
         public void updateWormFishing(BlockPos blockPos) {
@@ -210,7 +209,7 @@ public class WorldScanner {
 //            }
 //        }
         if (WorldScannerFilter.worldScannerCHFairyGrottos) {
-            for (Map.Entry<String, BlockPos> entry : currentWorld.getMobSpotWaypoints().entrySet()) {
+            for (Map.Entry<String, BlockPos> entry : currentWorld.getFairyGrottos().entrySet()) {
                 BlockPos blockPos = entry.getValue();
                 RenderUtils.renderEspBox(blockPos, event.partialTicks, Color.RED.getRGB());
                 RenderUtils.renderWaypointText(entry.getKey(), blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5, event.partialTicks);
@@ -286,7 +285,7 @@ public class WorldScanner {
                             if (structure.getStructureType().equals(StructureType.FAIRY_GROTTO)) {
                                 if (WorldScannerFilter.worldScannerCHFairyGrottos) {
                                     if (scanStructure(chunk, structure, x, y, z)) {
-                                        currentWorld.updateFairyGrottos(structure.getName(), new BlockPos(chunk.xPosition * 16 + x, y, chunk.zPosition * 16 + z));
+                                        currentWorld.updateFairyGrottos(structure.getName(), new BlockPos(chunk.xPosition * 16 + x + structure.getXOffset(), y+ structure.getYOffset(), chunk.zPosition * 16 + z + structure.getZOffset()));
                                         return;
                                     }
                                 } else if (WorldScannerFilter.worldScannerCHMagmaFieldsFairyGrottos && y < 64) {
